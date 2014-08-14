@@ -6,9 +6,11 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        <h1>Hello #{request.getParameter("name") == null ? 
-                    "World" : 
-                    request.getParameter("name")}!</h1>
+        <h:form>
+            <h:inputText value="#{helloController.name}"></h:inputText>
+            <h:commandButton value="OK" />
+        </h:form>
+        <h1>Hello #{helloController.name}!</h1>
     </h:body>
 </html>
 
