@@ -33,9 +33,9 @@ public class Hello {
 
     @POST
     @Consumes(MediaType.APPLICATION_XML)
-    @Produces(MediaType.APPLICATION_XML)
+    @Produces(MediaType.APPLICATION_JSON)
     public World helloPost(World world) {
-        Logger.getLogger(this.getClass().getCanonicalName()).log(Level.INFO, world.getName());
+        world.setName("Hello " + world.getName());
         return world;
     }
 }
