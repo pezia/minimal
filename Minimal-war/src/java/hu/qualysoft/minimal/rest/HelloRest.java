@@ -15,10 +15,10 @@ public class HelloRest extends Application {
     @Override
     public Set<Class<?>> getClasses() {
         Set<Class<?>> classSet = new HashSet<>();
-        
+
         classSet.add(Hello.class);
-        
+
         return classSet;
     }
-    
+
 }

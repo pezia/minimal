@@ -1,7 +1,5 @@
 package hu.qualysoft.minimal.rest;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -26,7 +24,7 @@ public class Hello {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("{name}")
+    @Path("{name: .*}")
     public World hello2(@PathParam("name") String name) {
         return new World(name);
     }
