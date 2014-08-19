@@ -11,7 +11,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "vilag")
 public class World {
 
-    private String name = "Hello";
+    private String name;
+    
+    public World() {
+        this("Hello");
+    }
+    
+    public World(String name) {
+        this.name = name;
+    }
 
     @XmlElement(name = "nev")
     public String getName() {
