@@ -17,7 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class HelloServlet extends HttpServlet {
 
-    @EJB
+    @Inject
+    @Szia
     HelloEjbLocal helloEjb;
 
     /**
