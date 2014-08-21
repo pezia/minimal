@@ -1,7 +1,11 @@
 package hu.qualysoft.minimal;
 
+import hu.qualysoft.minimal.ejb.HelloEjbLocal;
+import hu.qualysoft.minimal.ejb.Szia;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +16,9 @@ import javax.servlet.http.HttpServletResponse;
  * @author zsolt
  */
 public class HelloServlet extends HttpServlet {
+
+    @EJB
+    HelloEjbLocal helloEjb;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,14 +42,11 @@ public class HelloServlet extends HttpServlet {
             out.println("<title>Servlet HelloServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.print("<h1>Hello ");
-            
-            if(request.getParameter("name") == null)
-                out.print("World");
-            else
-                out.print(request.getParameter("name"));
-            
-            out.println("!</h1>");
+            out.print("<h1>");
+
+            out.print(helloEjb.createHello(request.getParameter("name")));
+
+            out.println("</h1>");
             out.println("</body>");
             out.println("</html>");
         }

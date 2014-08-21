@@ -1,6 +1,7 @@
 package hu.qualysoft.minimal.rest;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -15,13 +16,12 @@ import javax.ws.rs.core.MediaType;
  */
 @Path("hello")
 public class Hello {
-
     @GET
-    @Produces(MediaType.APPLICATION_XML)
+    @Produces({"application/xml; qs=1.0", "application/json; qs=0.5"})
     public World hello(@QueryParam("name") String name) {
         return new World(name);
     }
-
+    
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{name: .*}")
