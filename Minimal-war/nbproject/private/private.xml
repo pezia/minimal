@@ -5,7 +5,7 @@
         <group>
             <file>file:/C:/Users/zsolt/Documents/NetBeansProjects/Minimal/Minimal-war/web/WEB-INF/beans.xml</file>
             <file>file:/C:/Users/zsolt/Documents/NetBeansProjects/Minimal/Minimal-war/src/java/hu/qualysoft/minimal/HelloServlet.java</file>
-            <file>file:/C:/Users/zsolt/Documents/NetBeansProjects/Minimal/Minimal-war/src/java/hu/qualysoft/minimal/HelloController.java</file>
+            <file>file:/C:/Users/zsolt/Documents/NetBeansProjects/Minimal/Minimal-war/web/WEB-INF/web.xml</file>
         </group>
     </open-files>
 </project-private>

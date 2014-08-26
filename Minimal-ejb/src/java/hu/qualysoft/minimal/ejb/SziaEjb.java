@@ -1,7 +1,6 @@
 package hu.qualysoft.minimal.ejb;
 
 import javax.ejb.Stateless;
-import javax.ejb.LocalBean;
 
 /**
  *
