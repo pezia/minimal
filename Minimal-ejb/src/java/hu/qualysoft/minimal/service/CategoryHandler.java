@@ -25,8 +25,5 @@ public class CategoryHandler implements CategoryHandlerLocal {
     public Category findById(Long id) {
         return em.find(Category.class, id);
     }
-    
-    
-    
-    
+
 }

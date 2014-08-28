@@ -1,11 +1,13 @@
 package hu.qualysoft.minimal.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
@@ -15,23 +17,32 @@ import javax.persistence.NamedQuery;
  */
 @Entity
 @NamedQueries({
-    @NamedQuery(name = Category.QUERY_FIND_ALL, query = "SELECT c FROM Category c")
+    @NamedQuery(
+            name = Product.QUERY_FIND_BY_CATEGORY_ID,
+            query = "SELECT p FROM Product p WHERE p.category.id = :categoryId"
+    )
 })
-public class Category implements Serializable {
+public class Product implements Serializable {
+
+    public static final String QUERY_FIND_BY_CATEGORY_ID = "product.findByCategoryId";
 
     private static final long serialVersionUID = 1L;
-
-    public static final String QUERY_FIND_ALL = "category.findAll";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(length = 255, nullable = false)
     private String name;
 
-    @Column
+    @Column(length = 4096, nullable = true)
     private String description;
+
+    @Column(precision = 18, scale = 4)
+    private BigDecimal price;
+
+    @ManyToOne
+    private Category category;
 
     public String getName() {
         return name;
@@ -49,12 +60,28 @@ public class Category implements Serializable {
         this.description = description;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
     @Override
@@ -67,10 +94,10 @@ public class Category implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Category)) {
+        if (!(object instanceof Product)) {
             return false;
         }
-        Category other = (Category) object;
+        Product other = (Product) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -79,7 +106,7 @@ public class Category implements Serializable {
 
     @Override
     public String toString() {
-        return "hu.qualysoft.minimal.entity.Category[ id=" + id + " ]";
+        return "hu.qualysoft.minimal.entity.Product[ id=" + id + " ]";
     }
 
 }

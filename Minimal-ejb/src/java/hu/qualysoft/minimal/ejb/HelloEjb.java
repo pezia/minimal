@@ -1,13 +1,11 @@
 package hu.qualysoft.minimal.ejb;
 
 import javax.ejb.Stateless;
-import javax.enterprise.context.ApplicationScoped;
 
 /**
  *
  * @author zsolt
  */
-
 @Stateless
 public class HelloEjb implements HelloEjbLocal {
 

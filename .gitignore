@@ -4,3 +4,5 @@
 /Minimal-ejb/dist/
 /Minimal-war/dist/
 /dist/
+/Minimal-ejb/nbproject/private
+/Minimal-war/nbproject/private
