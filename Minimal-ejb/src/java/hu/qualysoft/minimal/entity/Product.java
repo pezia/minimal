@@ -3,19 +3,26 @@ package hu.qualysoft.minimal.entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 /**
  *
  * @author zsolt
  */
 @Entity
+@Table(name = "products")
+@Inheritance(strategy = InheritanceType.JOINED)
+//@DiscriminatorColumn(name = "product_type")
 @NamedQueries({
     @NamedQuery(
             name = Product.QUERY_FIND_BY_CATEGORY_ID,

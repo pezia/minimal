@@ -3,17 +3,14 @@ package hu.qualysoft.minimal.service;
 import hu.qualysoft.minimal.entity.Category;
 import hu.qualysoft.minimal.entity.Product;
 import java.util.List;
-import javax.ejb.Local;
+import javax.ejb.Remote;
 
 /**
  *
  * @author zsolt
  */
-@Local
-public interface ProductHandlerLocal {
-
+@Remote
+public interface ProductHandlerRemote {
     List<Product> findByCategory(Category category);
-
-    List<Product> addTestData();
-
+    List<Product> findAll();
 }

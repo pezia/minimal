@@ -6,3 +6,6 @@
 /dist/
 /Minimal-ejb/nbproject/private
 /Minimal-war/nbproject/private
+/MinimalClient/build/
+/MinimalClient/dist/
+/MinimalClient/nbproject/private/

@@ -78,4 +78,11 @@ public class Hello {
 
         return productHandler.findByCategory(category);
     }
+    
+    @GET
+    @Path("addTestData")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Product> addTestData() {
+        return productHandler.addTestData();
+    }
 }
