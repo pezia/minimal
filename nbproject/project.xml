@@ -19,9 +19,6 @@
                     <file>${reference.MinimalClient.j2ee-module-car}</file>
                     <path-in-war>/</path-in-war>
                 </library>
-                <library>
-                    <file>${reference.EjbInterfaces.dist-ear}</file>
-                </library>
             </web-module-additional-libraries>
         </data>
         <references xmlns="http://www.netbeans.org/ns/ant-project-references/1">
