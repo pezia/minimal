@@ -3,10 +3,7 @@ package minimalclient;
 import hu.qualysoft.minimal.entity.Product;
 import hu.qualysoft.minimal.service.ProductHandlerRemote;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
+import javax.ejb.EJB;
 
 /**
  *
@@ -14,22 +11,23 @@ import javax.naming.NamingException;
  */
 public class Main {
 
+    @EJB
+    public static ProductHandlerRemote productHandlerInjected;
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        ProductHandlerRemote productHandler;
-        
-        try {
-            InitialContext ic = new InitialContext();
-            productHandler = (ProductHandlerRemote) ic.lookup("java:global/Minimal/Minimal-ejb/ProductHandler!hu.qualysoft.minimal.service.ProductHandlerRemote");
-            
-            List<Product> products = productHandler.findAll();
-            for(Product product : products) {
-                System.out.println(product.getName() + " " + product.getClass().getCanonicalName());
-            }
-        } catch (NamingException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        LookupExample lookupExample = new LookupExample();
+
+        lookupExample.doStuff();
+
+        List<Product> products = productHandlerInjected.findAll();
+
+        System.out.println("\nInjected product handler returned:");
+
+        for (Product product : products) {
+            System.out.println(product.getName() + " " + product.getClass().getCanonicalName());
         }
     }
 

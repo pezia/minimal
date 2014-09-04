@@ -1,3 +1,4 @@
+/nbproject/private/
 /Minimal-ejb/build/
 /Minimal-war/build/
 /build/
@@ -9,3 +10,6 @@
 /MinimalClient/build/
 /MinimalClient/dist/
 /MinimalClient/nbproject/private/
+/MinimalCommon/nbproject/private/
+/MinimalCommon/build/
+/MinimalCommon/dist/
