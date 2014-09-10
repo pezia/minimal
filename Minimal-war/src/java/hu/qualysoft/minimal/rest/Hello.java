@@ -2,11 +2,17 @@ package hu.qualysoft.minimal.rest;
 
 import hu.qualysoft.minimal.entity.Category;
 import hu.qualysoft.minimal.entity.Product;
+import hu.qualysoft.minimal.service.AsyncServiceLocal;
 import hu.qualysoft.minimal.service.CategoryHandlerLocal;
 import hu.qualysoft.minimal.service.ProductHandlerLocal;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.servlet.annotation.ServletSecurity;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.NotFoundException;
@@ -30,6 +36,9 @@ public class Hello {
 
     @Inject
     ProductHandlerLocal productHandler;
+    
+    @Inject
+    AsyncServiceLocal asyncService;
 
     @GET
     @Produces({"application/xml; qs=1.0", "application/json; qs=0.5"})
@@ -84,5 +93,15 @@ public class Hello {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Product> addTestData() {
         return productHandler.addTestData();
+    }
+
+    @GET
+    @Path("async")
+    public String asyncTest() throws InterruptedException, ExecutionException {
+        Future<String> returnValue;
+        Logger.getLogger("Async test").log(Level.INFO, "Before call");
+        returnValue = asyncService.doJob();
+        Logger.getLogger("Async test").log(Level.INFO, "After call");
+        return returnValue.get();
     }
 }
