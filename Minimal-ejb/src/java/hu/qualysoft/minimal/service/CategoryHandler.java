@@ -19,7 +19,6 @@ public class CategoryHandler implements CategoryHandlerLocal {
     EntityManager em;
 
     @Override
-    @RolesAllowed({"user"})
     public List<Category> findAll() {
         return em.createNamedQuery(Category.QUERY_FIND_ALL, Category.class).getResultList();
     }

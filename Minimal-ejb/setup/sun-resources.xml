@@ -39,7 +39,7 @@
     </jdbc-connection-pool>
     <jdbc-resource 
         enabled="true" 
-        jndi-name="jdbc/minimal" 
+        jndi-name="java:/jdbc/minimal" 
         object-type="user" 
         pool-name="derby_net_minimal_appPool"/>
 </resources>

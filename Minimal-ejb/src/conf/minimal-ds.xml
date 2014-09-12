@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <datasources>
-    <datasource jndi-name="jdbc/minimal" pool-name="minimalPool" enabled="true" use-java-context="true">
-        <connection-url>jdbc:h2:mem:minimal;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE</connection-url>
+    <datasource jndi-name="java:/jdbc/minimal" pool-name="minimalPool" enabled="true" use-java-context="true">
+        <connection-url>jdbc:h2:mem:minimal;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=TRUE</connection-url>
         <driver>h2</driver>
         <security>
             <user-name>sa</user-name>
