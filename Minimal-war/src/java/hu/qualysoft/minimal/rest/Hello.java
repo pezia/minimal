@@ -5,14 +5,16 @@ import hu.qualysoft.minimal.entity.Product;
 import hu.qualysoft.minimal.service.AsyncServiceLocal;
 import hu.qualysoft.minimal.service.CategoryHandlerLocal;
 import hu.qualysoft.minimal.service.ProductHandlerLocal;
+import hu.qualysoft.minimal.worker.AsyncWorker;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.Resource;
+import javax.enterprise.concurrent.ManagedExecutorService;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.servlet.annotation.ServletSecurity;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.NotFoundException;
@@ -36,9 +38,12 @@ public class Hello {
 
     @Inject
     ProductHandlerLocal productHandler;
-    
+
     @Inject
     AsyncServiceLocal asyncService;
+
+    @Resource
+    ManagedExecutorService executorService;
 
     @GET
     @Produces({"application/xml; qs=1.0", "application/json; qs=0.5"})
@@ -87,7 +92,7 @@ public class Hello {
 
         return productHandler.findByCategory(category);
     }
-    
+
     @GET
     @Path("addTestData")
     @Produces(MediaType.APPLICATION_JSON)
@@ -98,10 +103,36 @@ public class Hello {
     @GET
     @Path("async")
     public String asyncTest() throws InterruptedException, ExecutionException {
-        Future<String> returnValue;
+        Future<String> futureResult;
+
         Logger.getLogger("Async test").log(Level.INFO, "Before call");
-        returnValue = asyncService.doJob();
+
+        futureResult = asyncService.doJob();
+
         Logger.getLogger("Async test").log(Level.INFO, "After call");
-        return returnValue.get();
+
+        String result = futureResult.get();
+
+        Logger.getLogger("Async test").log(Level.INFO, "Future.get finished");
+
+        return result;
+    }
+
+    @GET
+    @Path("executor")
+    public String executorTest() throws InterruptedException, ExecutionException {
+        Future<String> futureResult;
+
+        Logger.getLogger("Async test").log(Level.INFO, "Before executor submit");
+
+        futureResult = executorService.submit(new AsyncWorker());
+
+        Logger.getLogger("Async test").log(Level.INFO, "After executor submit");
+
+        String result = futureResult.get();
+
+        Logger.getLogger("Async test").log(Level.INFO, "Future.get finished");
+
+        return result;
     }
 }
