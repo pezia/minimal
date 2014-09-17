@@ -12,11 +12,13 @@ import java.util.concurrent.Future;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
+import javax.ejb.EJBAccessException;
 import javax.enterprise.concurrent.ManagedExecutorService;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.NotAuthorizedException;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -24,6 +26,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  *
@@ -70,7 +73,11 @@ public class Hello {
     @Path("category")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Category> getCategories() {
-        return categoryHandler.findAll();
+        try {
+            return categoryHandler.findAll();
+        } catch(EJBAccessException ex) {
+            throw new NotAuthorizedException("Not authorized", "all");
+        }
     }
 
     @GET
